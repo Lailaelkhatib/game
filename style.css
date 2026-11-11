@@ -1,0 +1,5 @@
+:root{
+  --purple:#3B1F6B; --purple2:#5B2A9E; --gold:#FBBF24; --orange:#F97316;
+  --teal:#14B8A6; --blue:#3B82F6; --green:#22C55E; --red:#EF4444;
+  --bg-fallback:#E9E4F5;               /* shown only if an image is missing */
+}
