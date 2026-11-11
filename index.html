@@ -20,3 +20,33 @@
 </div>
 
 
+<div id="how" class="screen" style="isolation:isolate">
+  <img src="bg-how.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <div class="panel">
+    <h2 class="oc">HOW TO PLAY</h2>
+    <ol class="how">
+      <li>Each question shows designs. <b>Tap the correct image</b> or pick the right answer.</li>
+      <li>Check the <b>Brand Guide</b> below (or press 📖 in the game) to know the rules.</li>
+      <li>Every correct answer gives <b>+10 points</b>. You see feedback after each answer.</li>
+      <li>There are <b>3 levels × 20 questions = 60</b>. Finish one level to unlock the next.</li>
+      <li>At the end you get your score, percentage and a performance message.</li>
+    </ol>
+    <div class="guide" id="g2"></div>
+    <div class="btn" onclick="show('home')">◀ BACK</div>
+    <div class="btn blue" onclick="buildLevels();show('levels')">LET'S PLAY ▶</div>
+  </div>
+</div>
+
+
+<div id="levels" class="screen" style="isolation:isolate">
+  <img src="bg-levels.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <div class="panel">
+    <h2 class="oc">SELECT YOUR LEVEL</h2>
+    <div class="cards" id="cards"></div>
+    <div style="margin-top:14px">
+      <div class="btn blue" onclick="show('home')">BACK</div>
+      <div class="btn big" onclick="gameStart()">GAME START!</div>
+    </div>
+  </div>
+</div>
+
