@@ -50,3 +50,33 @@
   </div>
 </div>
 
+
+<div id="quiz" class="screen" style="justify-content:flex-start;isolation:isolate">
+  <img src="bg-quiz.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <div class="qwrap">
+    <div class="hud">
+      <div class="btn sm blue" onclick="buildLevels();show('levels')">☰</div>
+      <div class="pb"><div id="bar"></div><span class="crown">👑</span></div>
+      <div class="btn sm teal" onclick="openGuide()">📖</div>
+      <div class="sc"> <span id="pts">0</span></div>
+    </div>
+    <div class="qcard"><small id="qnum"></small><div id="qtxt"></div></div>
+    <div id="area"></div>
+  </div>
+  <div id="fb" class="fb"></div>
+</div>
+
+
+<div id="lvdone" class="screen" style="isolation:isolate">
+  <img src="bg-levelend.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <div class="panel" id="lvbox"></div>
+</div>
+
+
+<div id="res" class="screen" style="isolation:isolate">
+  <img src="bg-results.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <div class="panel" id="resbox"></div>
+</div>
+
+</body>
+</html>
