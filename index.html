@@ -400,7 +400,38 @@ function levelEnd(){
  show("lvdone");
 }
 
+function results(){
+ let r=R[0]+R[1]+R[2], w=W[0]+W[1]+W[2];
+ let pc=Math.round(r/60*100), msg="";
+ if(pc>=90){ msg="🏆 Brand Hero! Pixel-perfect eye. Nothing escapes you."; }
+ else if(pc>=70){ msg="🎨 Design Master! You spot most of the glitches."; }
+ else if(pc>=50){ msg="🔍 Good inspector! Review the Brand Guide and try again."; }
+ else { msg="📘 Keep training! Read the Brand Guide and play again."; }
+ document.getElementById("resbox").innerHTML=`<h2 class="oc">FINAL RESULTS</h2>
+ <div class="row">
+<div class="stat"><b>${r}</b>Correct</div>
+<div class="stat"><b>${w}</b>Incorrect</div>
+<div class="stat"><b>${pts}</b>Final score / 600</div>
+<div class="stat"><b>${pc}%</b>Overall</div></div>
+<p style="font-size:26px;color:#FDE68A">${msg}</p>
+<p>Level 1: ${R[0]}/20 &nbsp; Level 2: ${R[1]}/20 &nbsp; Level 3: ${R[2]}/20</p>
+<div class="btn big" onclick="restart()">RESTART GAME ↻</div>`;
+show("res");
+}
 
+function restart(){
+lvl=0; qi=0; cur=0; pts=0;
+R=[0,0,0]; W=[0,0,0];
+document.getElementById("pts").innerHTML=0;
+show("home");
+}
+
+
+document.getElementById("g1").innerHTML=GUIDE;
+document.getElementById("g2").innerHTML=GUIDE;
+document.getElementById("bbL").innerHTML=draw("L",{s:"st"});
+document.getElementById("bbR").innerHTML=draw("L",{});
+show("home");
 </script>
 </body>
 </html>
