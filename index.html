@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="home" class="screen" style="isolation:isolate">
-  <img src="gamebg2.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <img src="gamebg2.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> 
   <div class="bb float" id="bbL"></div><div class="bb float" id="bbR"></div>
   <h1 class="ttl oc">
     <span style="color:#34D399">B</span><span style="color:#60A5FA">R</span><span style="color:#A78BFA">A</span><span style="color:#F472B6">N</span><span style="color:#FBBF24">D</span><br>INSPECTOR</h1>
@@ -21,7 +21,7 @@
 
 
 <div id="how" class="screen" style="isolation:isolate">
-  <img src="bg-how.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <img src="bg-how.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> 
   <div class="panel">
     <h2 class="oc">HOW TO PLAY</h2>
     <ol class="how">
@@ -39,7 +39,7 @@
 
 
 <div id="levels" class="screen" style="isolation:isolate">
-  <img src="bg-levels.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <img src="bg-levels.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> 
   <div class="panel">
     <h2 class="oc">SELECT YOUR LEVEL</h2>
     <div class="cards" id="cards"></div>
@@ -52,7 +52,7 @@
 
 
 <div id="quiz" class="screen" style="justify-content:flex-start;isolation:isolate">
-  <img src="bg-quiz.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <img src="0a39d544-b393-49b3-81b6-4a79c258f35c 1.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> 
   <div class="qwrap">
     <div class="hud">
       <div class="btn sm blue" onclick="buildLevels();show('levels')">☰</div>
@@ -68,15 +68,68 @@
 
 
 <div id="lvdone" class="screen" style="isolation:isolate">
-  <img src="bg-levelend.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <img src="bg-levelend.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> 
   <div class="panel" id="lvbox"></div>
 </div>
 
 
 <div id="res" class="screen" style="isolation:isolate">
-  <img src="bg-results.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> <!-- CHANGE IMAGE NAME HERE -->
+  <img src="bg-results.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1"> 
   <div class="panel" id="resbox"></div>
 </div>
 
-</body>
-</html>
+
+<div id="guide">
+  <div class="panel" style="width:min(560px,96vw)">
+    <h2 class="oc">BRAND GUIDE</h2>
+    <div class="guide" id="g1"></div>
+    <div class="btn" onclick="closeGuide()">GOT IT ✓</div>
+  </div>
+</div>
+
+<script>
+
+let GF="Georgia, serif", CF="Courier New, monospace", IF="Impact, sans-serif", CS="Comic Sans MS, cursive";
+let AB=["A","B","C","D"];
+let NAMES=["BEGINNER - INSPECTION TRAINEE","INTERMEDIATE - DESIGN MASTER","ADVANCED - BRAND HERO"];
+let BASE={c:"#2563EB",k:"#F97316",r:12,f:"Verdana, sans-serif",g:12,i:"f",a:"left",w:700,t:"#fff",ts:22,bs:12,d:0};
+let KEYS=["c","k","r","f","g","i","a","w","t","ts","bs","d"];
+let lvl=0, qi=0, cur=0, lock=false, pts=0;
+let R=[0,0,0], W=[0,0,0];
+
+let GUIDE=`
+<p><b>Logo:</b> blue only. Never stretch, rotate or crowd it. It needs strong contrast.</p>
+<p><b>Colors:</b> <span class="sw" style="background:#2563EB"></span> Primary #2563EB
+ <span class="sw" style="background:#F97316"></span> Accent #F97316
+ <span class="sw" style="background:#F3F4F6"></span><span class="sw" style="background:#111827"></span> Neutrals</p>
+<p><b>Font:</b> Verdana. Titles bigger and bolder than body text.</p>
+<p><b>Buttons:</b> orange accent, 12px rounded corners.</p>
+<p><b>Icons:</b> filled and round, one style only.</p>
+<p><b>Layout:</b> 12px spacing, text left-aligned.</p>
+<p><b>Dark mode:</b> only the background changes. Brand colors and fonts stay.</p>`;
+
+
+function iff(c,a,b){ if(c){ return a; } return b; }
+function show(id){
+  let S=["home","how","levels","quiz","lvdone","res"];
+  for(let i=0;i<S.length;i++){
+    if(S[i]===id){ document.getElementById(S[i]).style.display="flex"; }
+    else { document.getElementById(S[i]).style.display="none"; }
+  }
+}
+function mx(p){
+  let o={};
+  for(let i=0;i<KEYS.length;i++){
+    o[KEYS[i]]=p[KEYS[i]];
+    if(o[KEYS[i]]===undefined){ o[KEYS[i]]=BASE[KEYS[i]]; }
+  }
+  return o;
+}
+function starStr(r){
+  let n=1;
+  if(r>=18){ n=3; } else if(r>=12){ n=2; }
+  let s="";
+  for(let i=0;i<n;i++){ s+="⭐"; }
+  return s;
+}
+
