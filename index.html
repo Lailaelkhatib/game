@@ -244,4 +244,26 @@ Q("Which text is the easiest to read?","X",[{bg:"#FACC15",fg:"#fff"},{bg:"#11182
 Q("Which logo size is right to be noticed?","L",[{s:"sm"},{s:"ok"}],1,"The logo must be big enough to read. A tiny logo gets lost.")
 ];
 
+let L2=[
+Q("Three screens match. Which one is the odd one out?","U",[{},{},{c:"#0EA5E9"},{}],2,"Screen C has a different blue in the header."),
+Q("What is inconsistent between screens A and B?","U",[{},{r:0}],0,"Button corners: 12px on A, square on B.",["Button corners","Font family","Icon style","Spacing"]),
+Q("What is inconsistent between screens A and B?","U",[{},{i:"o"}],2,"Icon style: filled on A, outline on B.",["Header color","Alignment","Icon style","Button color"]),
+Q("What is inconsistent between screens A and B?","U",[{},{f:GF}],1,"The font family changed to a serif.",["Spacing","Font family","Corner radius","Icons"]),
+Q("What is inconsistent between screens A and B?","U",[{},{g:32}],3,"Spacing: 12px on A, 32px on B.",["Font","Header color","Alignment","Spacing"]),
+Q("What is inconsistent between screens A and B?","U",[{a:"center"},{}],0,"Text alignment: centered on A, left on B.",["Alignment","Button color","Icons","Font size"]),
+Q("What is inconsistent between screens A and B?","U",[{},{k:"#16A34A"}],1,"The call-to-action color is green instead of orange.",["Header color","Button color","Spacing","Font"]),
+Q("Which screen follows the guide completely?","U",[{r:0},{i:"o"},{},{g:30}],2,"Only C has the right corners, icons and spacing."),
+Q("Which screen would you reject in a design review?","U",[{},{},{f:CF}],2,"Screen C uses a monospace font."),
+Q("Which footer logo matches the header logo?","L",[{s:"wc"},{s:"ok"},{s:"st"}],1,"The footer logo must be the same as the header logo.",undefined,["L",{s:"ok"}]),
+Q("Which button keeps this page consistent?","B",[{k:"#16A34A"},{k:"#7C3AED"},{}],2,"The page uses an orange call-to-action.",undefined,["U",{}]),
+Q("Which social post matches this website?","S",[{},{c:"#16A34A"},{f:IF}],0,"Same colors and font as the website.",undefined,["U",{}]),
+Q("Which dark-mode screen keeps the brand colors?","U",[{d:1,c:"#F97316",k:"#2563EB"},{d:1},{d:1,f:CS}],1,"Dark mode changes the background only. Colors and fonts stay."),
+Q("Which text sample works better for a card title?","F",[{ts:13,bs:13,w:400},{ts:24,bs:12}],1,"A larger, bolder title creates a clear hierarchy."),
+Q("Which UI uses a color outside the palette?","U",[{k:"#7C3AED"},{},{}],0,"Purple is not in the Lumo palette."),
+Q("Which button is the most noticeable?","B",[{k:"#FED7AA",t:"#FDBA74"},{},{k:"#E5E7EB",t:"#9CA3AF"}],1,"The brand orange with white text stands out the most."),
+Q("Do these two screens follow the same design system?","U",[{},{r:0,i:"o"}],1,"No. Corners and icon style are different.",["Yes, same system","No, different systems"]),
+Q("How many differences are there between A and B?","U",[{},{r:0,f:GF}],1,"Two: button corners and font family.",["1","2","3","4"]),
+Q("Which icon set fits this screen best?","I",[{s:"ffff"},{s:"oooo"},{s:"qqqq"}],0,"Filled round icons match the screen's icon style.",undefined,["U",{}]),
+Q("Which screen has the best readable contrast?","U",[{c:"#FDE68A"},{},{c:"#D1D5DB"}],1,"White text needs a dark enough header.")
+];
 
