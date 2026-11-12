@@ -133,3 +133,115 @@ function starStr(r){
   return s;
 }
 
+
+function logo(p){
+ let s=p.s||"ok", bg=p.bg||"#fff", c="#2563EB", x="", sz=44, pad=18, gap=6, extra="";
+ if(s==="st"){ x="transform:scaleX(1.8);"; }
+ if(s==="ro"){ x="transform:rotate(-18deg);"; }
+if(s==="wc"){ c="#DC2626"; }
+if(s==="sh"){ x="filter:drop-shadow(5px 6px 2px #000);"; }
+ if(s==="sm"){ sz=16; }
+if(s==="lc"){ bg="#2563EB"; c="#3B6FEA"; }
+ if(s==="ti"){ pad=0; gap=0; extra="<b style='font:900 16px Verdana;color:#111;white-space:nowrap'>SALE-50%</b>"; }
+ if(bg==="busy"){ bg="repeating-linear-gradient(45deg,#2563EB 0 8px,#F97316 8px 16px)"; }
+ return `<div style="background:${bg};padding:${pad}px;border-radius:10px;border:1px solid #ccc;display:flex;justify-content:center;align-items:center;min-height:84px;overflow:hidden">
+ <div style="display:flex;align-items:center;gap:${gap}px;${x}">
+ <span style="width:${sz}px;height:${sz}px;background:${c};color:#fff;border-radius:30%;display:flex;align-items:center;justify-content:center;font:900 ${sz*0.6}px Verdana">L</span>
+ <b style="font:900 ${sz*0.6}px Verdana;color:${c}">Lumo</b>${extra}</div></div>`;
+}
+function btn(p){
+ p=mx(p);
+ return `<div style="display:inline-block;padding:9px 18px;background:${p.k};color:${p.t};border-radius:${p.r}px;font:${p.w} 13px ${p.f}">Buy now</div>`;
+}
+function pal(p){
+ let h="";
+ for(let i=0;i<p.cs.length;i++){ h+=`<div style="flex:1;background:${p.cs[i]}"></div>`; }
+ return `<div style="display:flex;height:70px;border-radius:10px;overflow:hidden;border:1px solid #ccc">${h}</div>`;
+}
+function fnt(p){
+ p=mx(p);
+ return `<div style="background:#fff;border-radius:10px;padding:14px;border:1px solid #ccc;font-family:${p.f};text-align:left">
+ <div style="font-size:${p.ts}px;font-weight:${p.w};color:${p.c}">Fresh &amp; Fast</div>
+ <div style="font-size:${p.bs}px;color:#374151;margin-top:6px">Lumo brings your groceries in 15 minutes.</div></div>`;
+}
+function icons(p){
+ let g=["★","♥","⌂","✉"], h="";
+ for(let i=0;i<4;i++){
+  let t=p.s[i], rad=50, bgc="#2563EB", col="#fff", bd="#2563EB";
+  if(t==="q"){ rad=4; }
+ if(t==="o"){ bgc="#fff"; col="#2563EB"; }
+ if(t==="d"){ bgc="#F97316"; bd="#F97316"; }
+ h+=`<span style="width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:${rad}%;background:${bgc};border:2px solid ${bd};color:${col};font-size:16px">${g[i]}</span>`;
+ }
+ return `<div style="display:flex;gap:10px;justify-content:center;background:#fff;padding:18px;border-radius:10px;border:1px solid #ccc">${h}</div>`;
+}
+function ui(p){
+ p=mx(p);
+ let bg="#fff", fg="#111827", rad=50, ib=p.c, jc="flex-start";
+if(p.d){ bg="#111827"; fg="#F9FAFB"; }
+if(p.i==="q"){ rad=3; }
+ if(p.i==="o"){ ib="transparent"; }
+ if(p.a==="center"){ jc="center"; }
+ return `<div style="background:${bg};color:${fg};border-radius:10px;overflow:hidden;font-family:${p.f};border:1px solid #ccc;text-align:${p.a}">
+ <div style="background:${p.c};color:#fff;padding:8px 10px;font-weight:700;font-size:13px">Lumo Market</div>
+ <div style="padding:${p.g}px;display:flex;flex-direction:column;gap:${p.g}px">
+<div style="display:flex;gap:6px;align-items:center;justify-content:${jc}">
+  <span style="width:16px;height:16px;flex:none;border-radius:${rad}%;background:${ib};border:2px solid ${p.c}"></span><b style="font-size:15px">Fresh Apples</b></div>
+ <div style="font-size:11px;opacity:.8">Crisp, sweet, delivered today.</div>
+<div>${btn(p)}</div></div></div>`;
+}
+function soc(p){
+ p=mx(p);
+ let al="flex-start";
+ if(p.a==="center"){ al="center"; }
+ return `<div style="background:${p.c};color:#fff;border-radius:${p.r}px;padding:14px;font-family:${p.f};text-align:${p.a};min-height:150px;display:flex;flex-direction:column;justify-content:space-between">
+ <b style="font-size:13px">▣ Lumo</b><b style="font-size:19px">Fresh &amp; fast, every day</b>
+ <span style="background:${p.k};padding:5px 12px;border-radius:${p.r}px;font-size:12px;font-weight:700;align-self:${al}">Order</span></div>`;
+}
+function txt(p){
+ return `<div style="background:${p.bg};color:${p.fg};border-radius:10px;padding:24px;text-align:center;font:900 26px Verdana;border:1px solid #ccc">Aa Lumo</div>`;
+}
+function comp(p){
+ p=mx(p);
+ return `<div style="background:#fff;border:1px solid #ccc;border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:8px;font-family:${p.f}">
+ ${logo({s:p.l||"ok"})}${pal({cs:[p.c,p.k,"#F3F4F6","#111827"]})}<div style="text-align:center">${btn(p)}</div></div>`;
+}
+function draw(k,p){
+ if(k==="L"){ return logo(p); }
+ if(k==="B"){ return `<div class="pad">${btn(p)}</div>`; }
+ if(k==="P"){ return pal(p); }
+ if(k==="F"){ return fnt(p); }
+ if(k==="I"){ return icons(p); }
+ if(k==="U"){ return ui(p); }
+ if(k==="S"){ return soc(p); }
+ if(k==="X"){ return txt(p); }
+ if(k==="C"){ return comp(p); }
+ return "";
+}
+
+let Q=(q,k,p,a,e,tx,ref)=>({q:q,k:k,p:p,a:a,e:e,tx:tx,ref:ref});
+
+let L1=[
+Q("Which logo is shown correctly?","L",[{s:"st"},{s:"ok"}],1,"A logo is never stretched. Keep its original proportions."),
+Q("Which logo has enough clear space around it?","L",[{s:"ok"},{s:"ti"}],0,"Keep free space around the logo. Do not crowd it with other text."),
+Q("Which logo is easy to read on its background?","L",[{s:"lc"},{s:"ok"},{s:"ok",bg:"busy"}],1,"The logo needs strong contrast. Same-color or busy backgrounds hide it."),
+Q("Which logo uses the official brand colors?","L",[{s:"wc"},{s:"sh"},{s:"ok"}],2,"Lumo's logo is blue only. No new colors and no heavy shadows."),
+Q("Which color is Lumo's primary brand color?","P",[{cs:["#16A34A"]},{cs:["#2563EB"]},{cs:["#DC2626"]},{cs:["#7C3AED"]}],1,"Blue #2563EB is the primary color in the guide."),
+Q("Which palette matches the Lumo guide?","P",[{cs:["#DC2626","#16A34A","#FACC15","#7C3AED"]},{cs:["#EC4899","#14B8A6","#A3E635","#0EA5E9"]},{cs:["#2563EB","#F97316","#F3F4F6","#111827"]}],2,"Blue and orange plus calm neutrals. Too many bright colors feels messy."),
+Q("Which button follows the guide (orange, 12px corners)?","B",[{r:0},{k:"#16A34A"},{},{r:30}],2,"Orange accent with 12px corners. The others change the color or the shape."),
+Q("Which font matches the guide?","F",[{f:GF},{f:CF},{f:IF},{}],3,"Lumo uses clean Verdana. Fancy fonts break the brand voice."),
+Q("Which text sample has a clear hierarchy?","F",[{ts:14,bs:14},{ts:22,bs:12},{ts:12,bs:22}],1,"The title must be bigger and bolder than the body text."),
+Q("Which icon set is consistent?","I",[{s:"fofq"},{s:"ffff"},{s:"qfdo"}],1,"Use one icon style across the set: filled and round."),
+Q("Which screen keeps text left-aligned like the guide?","U",[{},{a:"center"}],0,"The guide says text is left-aligned."),
+Q("Which button has the right corner radius?","B",[{r:0},{r:12},{r:40}],1,"Corners are 12px. Square or pill-shaped buttons are off-brand."),
+Q("Which social post follows the brand?","S",[{},{c:"#DC2626"},{f:CS}],0,"Blue background, orange button and Verdana. The others break color or font."),
+Q("Is this button on-brand?","B",[{r:0,k:"#16A34A"}],1,"No. It has the wrong color and square corners.",["Yes, on-brand","No, off-brand"]),
+Q("What is wrong with this logo?","L",[{s:"ro"}],0,"Logos are never rotated.",["It is rotated","Wrong font","Too small","Nothing is wrong"]),
+Q("What is wrong with this button?","B",[{f:CF}],0,"The button uses a different font family.",["Wrong font","Wrong color","Corners too round","Nothing is wrong"]),
+Q("Which layout uses the guide's 12px spacing?","U",[{g:30},{},{g:2}],1,"12px spacing. The others are too loose or too tight."),
+Q("Three buttons are on-brand. Find the odd one out.","B",[{},{k:"#16A34A"},{},{}],1,"Button B is green. The brand button is orange."),
+Q("Which text is the easiest to read?","X",[{bg:"#FACC15",fg:"#fff"},{bg:"#111827",fg:"#fff"},{bg:"#D1D5DB",fg:"#9CA3AF"},{bg:"#F97316",fg:"#DC2626"}],1,"White on near-black has the strongest contrast."),
+Q("Which logo size is right to be noticed?","L",[{s:"sm"},{s:"ok"}],1,"The logo must be big enough to read. A tiny logo gets lost.")
+];
+
+
