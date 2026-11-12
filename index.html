@@ -267,3 +267,140 @@ Q("Which icon set fits this screen best?","I",[{s:"ffff"},{s:"oooo"},{s:"qqqq"}]
 Q("Which screen has the best readable contrast?","U",[{c:"#FDE68A"},{},{c:"#D1D5DB"}],1,"White text needs a dark enough header.")
 ];
 
+let L3=[
+Q("Fix every problem in the reference. Which screen is fully correct?","U",[{r:12,f:GF,g:4},{},{r:0,g:12}],1,"Only B fixes corners, font and spacing together.",undefined,["U",{r:0,f:GF,g:4}]),
+Q("Which version fixes all the problems in the reference?","U",[{a:"center",k:"#16A34A"},{i:"o",k:"#16A34A"},{}],2,"The reference has outline icons, centered text and a green button. Only C fixes all three.",undefined,["U",{i:"o",a:"center",k:"#16A34A"}]),
+Q("Which version corrects the reference?","U",[{f:CF,r:30},{},{c:"#0EA5E9",r:30}],1,"The reference has a wrong blue, monospace font and pill button. Only B fixes all.",undefined,["U",{c:"#0EA5E9",f:CF,r:30}]),
+Q("Which fix keeps dark mode and restores the brand?","U",[{d:1},{d:1,c:"#F97316"},{c:"#2563EB"}],0,"A keeps the dark background and brings back blue, orange and Verdana. C loses dark mode.",undefined,["U",{d:1,c:"#F97316",f:CS}]),
+Q("Which screen has the MOST guideline violations?","U",[{r:0},{r:0,f:GF,g:4},{f:GF},{}],1,"Screen B breaks corners, font and spacing."),
+Q("Which screen has the MOST guideline violations?","U",[{},{i:"o",a:"center"},{i:"o",a:"center",k:"#16A34A",r:0},{k:"#16A34A"}],2,"Screen C breaks icons, alignment, button color and corners."),
+Q("Which screen has the FEWEST violations but is still not perfect?","U",[{r:0,f:GF,g:30},{r:0},{i:"o",g:30,r:0},{c:"#0EA5E9",k:"#16A34A",r:0}],1,"Screen B only breaks the button corners."),
+Q("Which brand sheet (logo, palette, button) is the best overall experience?","C",[{l:"wc"},{},{c:"#16A34A",k:"#7C3AED"}],1,"Only B keeps the logo, palette and button on-brand."),
+Q("Which brand sheet is cohesive?","C",[{c:"#DC2626",k:"#16A34A",l:"wc"},{r:0,f:CS},{}],2,"Logo, palette and button all follow the guide in C."),
+Q("Which brand sheet has exactly ONE problem?","C",[{l:"wc"},{l:"wc",r:0,f:CF},{k:"#16A34A",l:"wc",r:0}],0,"Sheet A only has a wrong-colored logo."),
+Q("How many guideline violations does this screen have?","U",[{r:0,f:GF,i:"o"}],2,"Three: square corners, serif font and outline icon.",["1","2","3","4"]),
+Q("How many guideline violations does this screen have?","U",[{r:0,g:4,a:"center",k:"#16A34A"}],3,"Four: corners, spacing, alignment and button color.",["1","2","3","5"]),
+Q("How many guideline violations does this screen have?","U",[{f:CS}],0,"Only one: the font.",["1","2","3","0"]),
+Q("How many guideline violations does this screen have?","U",[{c:"#0EA5E9",i:"q",r:30}],1,"Three: header color, square icon and pill button.",["2","3","4","5"]),
+Q("Which social ad keeps the brand consistent with this app?","S",[{f:CS,k:"#16A34A"},{},{c:"#F97316",k:"#2563EB"}],1,"B uses the same colors, font and corners as the app.",undefined,["U",{}]),
+Q("Which app screen matches this social post?","U",[{c:"#DC2626"},{f:IF},{}],2,"C uses the same blue, orange and Verdana as the post.",undefined,["S",{}]),
+Q("Which issue hurts usability the MOST in this screen?","U",[{c:"#FDE68A"}],0,"White text on a pale header is almost impossible to read.",["Low-contrast header","Icon shape","Corner radius","Spacing"]),
+Q("Which dark-mode screen is the best fix for the broken one?","U",[{d:1},{d:0},{d:1,k:"#16A34A"}],0,"The button disappears on dark. A keeps dark mode with the orange button.",undefined,["U",{d:1,c:"#111827",k:"#111827"}]),
+Q("Which complete design would you approve?","U",[{r:0,i:"o"},{g:30,f:GF},{c:"#0EA5E9",a:"center"},{}],3,"Only D follows every rule in the guide."),
+Q("BOSS ROUND! Find the one screen with ZERO violations.","U",[{g:20},{},{i:"q"},{c:"#1D4ED8"}],1,"B is perfect. The others change spacing, icon shape or the blue tone.")
+];
+let ALL=[L1,L2,L3];
+
+
+function openGuide(){ document.getElementById("guide").style.display="flex"; }
+function closeGuide(){ document.getElementById("guide").style.display="none"; }
+
+function buildLevels(){
+ let h="";
+ let TH=[["L",{}],["P",{cs:["#2563EB","#F97316","#F3F4F6","#111827"]}],["U",{}]];
+ for(let i=0;i<3;i++){
+ let stat="", b="", st="";
+ if(i<cur){
+stat=`<div class="pbar full">COMPLETE ${R[i]}/20</div>`;
+ b=`<div class="btn off">DONE ✓</div>`;
+st=starStr(R[i]);
+ } else if(i===cur){
+ stat=`<div class="pbar">READY TO PLAY</div>`;
+ b=`<div class="btn" onclick="startLevel(${i})">START</div>`;
+} else {
+ stat=`<div class="pbar lock">🔒 Finish level ${i} first</div>`;
+ b=`<div class="btn off">LOCKED</div>`; }
+ h+=`<div class="card"><div class="ct">LEVEL ${i+1}</div><div class="cs">${NAMES[i]}</div>
+ <div class="thumb">${draw(TH[i][0],TH[i][1])}</div><div style="min-height:28px">${st}</div>${stat}${b}</div>`;
+ }
+ document.getElementById("cards").innerHTML=h;
+}
+
+function gameStart(){
+     if(cur>=3){ results(); } else { startLevel(cur); }
+}
+
+function startLevel(n){
+pts=pts-R[n]*10;
+ R[n]=0; W[n]=0; lvl=n; qi=0;
+document.getElementById("pts").innerHTML=pts;
+ show("quiz");
+ showQ();
+}
+
+function showQ(){
+ lock=false;
+ let q=ALL[lvl][qi], h="";
+ document.getElementById("qnum").innerHTML="Level "+(lvl+1)+" - Question "+(qi+1)+" of 20";
+ document.getElementById("bar").style.width=(qi/20*100)+"%";
+ document.getElementById("qtxt").innerHTML=q.q;
+ if(q.ref){
+ h+=`<div class="ref"><small>REFERENCE</small>${draw(q.ref[0],q.ref[1])}</div>`;
+ }
+ h+=`<div class="grid g${q.p.length}">`;
+for(let i=0;i<q.p.length;i++){
+if(q.tx){
+ h+=`<div class="cell"><span class="tag">${AB[i]}</span>${draw(q.k,q.p[i])}</div>`;
+ } else {
+ h+=`<div class="opt" id="o${i}" onclick="pick(${i})"><span class="tag">${AB[i]}</span>${draw(q.k,q.p[i])}</div>`;
+ }
+ }
+ h+="</div>";
+ if(q.tx){
+ h+=`<div class="tgrid">`;
+ for(let i=0;i<q.tx.length;i++){
+ h+=`<div class="tbtn" id="o${i}" onclick="pick(${i})">${q.tx[i]}</div>`;
+ }
+ h+="</div>";
+ }
+ document.getElementById("area").innerHTML=h;
+ document.getElementById("fb").style.display="none";
+ window.scrollTo(0,0);
+}
+
+function pick(i){
+ if(lock){ return; }
+ lock=true;
+ let q=ALL[lvl][qi], fb=document.getElementById("fb"), msg="";
+ if(i===q.a){
+ R[lvl]+=1; pts+=10;
+ document.getElementById("o"+i).className+=" good";
+ fb.className="fb win";
+ msg="✅ Correct! +10 ";
+ } else {
+ W[lvl]+=1;
+document.getElementById("o"+i).className+=" bad";
+ document.getElementById("o"+q.a).className+=" good";
+ fb.className="fb lose";
+ msg="❌ Not quite. ";
+ }
+ document.getElementById("pts").innerHTML=pts;
+ let label="NEXT ▶";
+ if(qi===19){ label="FINISH LEVEL 🏁"; }
+ fb.innerHTML=`<b>${msg}</b>${q.e}<br><div class="btn sm" style="margin-top:8px" onclick="next()">${label}</div>`;
+ fb.style.display="block";
+}
+
+function next(){
+ qi+=1;
+ if(qi<20){ showQ(); } else { levelEnd(); }
+}
+
+function levelEnd(){
+ if(cur<=lvl){ cur=lvl+1; }
+ let h=`<h2 class="oc">LEVEL ${lvl+1} COMPLETE!</h2>
+ <div class="stars">${starStr(R[lvl])}</div>
+ <div class="row"><div class="stat"><b>${R[lvl]}</b>Correct</div><div class="stat"><b>${W[lvl]}</b>Incorrect</div></div><br>`;
+ if(lvl<2){
+ h+=`<div class="btn big" onclick="startLevel(${lvl+1})">NEXT LEVEL ▶</div>`;
+ } else {
+ h+=`<div class="btn big" onclick="results()">SEE RESULTS ▶</div>`;
+ }
+ document.getElementById("lvbox").innerHTML=h;
+ show("lvdone");
+}
+
+
+</script>
+</body>
+</html>
